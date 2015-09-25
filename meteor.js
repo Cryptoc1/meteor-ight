@@ -50,7 +50,7 @@ window.onload = function () {
             })
         })(0);
     }
-    img.src = "/map.svg";
+    img.src = "map.svg";
     canvas.addEventListener('mousemove', mousemoved, false);
 }
 
