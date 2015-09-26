@@ -12,6 +12,5 @@ project is to use something like the Wikipedia API to load additional informatio
 
 ### TODO:
 * Improve the UI/UX
-    +Like make the points circles, instead of squares
-    +Make, I don't know, colorful
+        * Like make the points circles, instead of squares
 * "Datamining" additional information for the sidebar
