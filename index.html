@@ -65,7 +65,6 @@
         #info {
             min-width: 15%;
             width: auto;
-            max-width: 25%;
             height: 91%;
             padding: .5%;
             position: fixed;
@@ -91,6 +90,41 @@
             font-size: 14pt;
             font-weight: 200;
         }
+        
+        #key {
+            position: fixed;
+            left: 1%;
+            bottom: 1.5%;
+            background-color: rgba(117, 117, 117, .75);
+            width: 15%;
+            min-width: 15%;
+            height: 23%;
+            min-height: 23%;
+            border-radius: 3px;
+            padding: 15px;
+            opacity: .35;
+            transition: opacity .5s;
+        }
+        
+        #key div {
+            display: inline-block;
+            margin: 2px auto;
+            margin-right: 5px;
+        }
+        
+        .item {
+            margin: 2px;
+        }
+        
+        .color {
+            width: 15px;
+            height: 15px;
+            border-radius: 2px;
+        }
+        
+        .value {
+            font-size: 12pt;
+        }
     </style>
 </head>
 
@@ -100,6 +134,54 @@
         <div id="message">Data courtesy NASA, &copy; NASA</div>
     </div>
     <canvas id="canvas"></canvas>
+    <div id="key" onmouseover="(function(){document.getElementById('key').style.opacity = .9;})();" onmouseout="(function(){document.getElementById('key').style.opacity = .35;})();">
+        Year Landed
+        <br>
+        <div class="item">
+            <div class="color" style="background-color: rgba(121, 85, 72, .95)"></div>
+            <div class="value">&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;1000&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(96, 125, 139, 0.7)"></div>
+            <div class="value">1000-1100</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(156, 39, 176, .7)"></div>
+            <div class="value">1200-1300</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(33, 150, 243, .7)"></div>
+            <div class="value">1300-1400</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(26, 35, 126, .7)"></div>
+            <div class="value">1400-1500</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(76, 175, 80, 0.7)"></div>
+            <div class="value">1500-1600</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(255, 235, 59, 0.7)"></div>
+            <div class="value">1600-1700</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(255, 87, 34, 0.7)"></div>
+            <div class="value">1700-1800</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(118, 255, 3, 0.7)"></div>
+            <div class="value">1800-1900</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(0, 150, 136, 0.7)"></div>
+            <div class="value">1900-2000</div>
+        </div>
+        <div class="item">
+            <div class="color" style="background-color: rgba(244, 67, 54, .6)"></div>
+            <div class="value">2000-2100</div>
+        </div>
+    </div>
     <div id="title"></div>
     <div id="info"></div>
 </body>

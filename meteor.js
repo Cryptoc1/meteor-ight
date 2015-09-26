@@ -2,19 +2,20 @@ var width = window.innerWidth,
     height = window.innerHeight;
 var pts = [];
 
-function Landing(x, y, w, h, mass, name, year, lat, long) {
+function Landing(x, y, w, h, recclass, mass, name, year, lat, long) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
     this.mass = mass;
+    this.recclass = recclass;
     this.name = name;
     this.year = year;
     this.lat = lat;
     this.long = long;
 }
 
-window.onload = function () {
+window.onload = function draw() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     ctx.canvas.width = width;
@@ -30,18 +31,76 @@ window.onload = function () {
                     return;
                 }
                 res.json().then(function (data) {
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length - 1; i++) {
                         var pos = ltoc(data[i].reclat, data[i].reclong);
-                        ctx.moveTo(pos.long, pos.lat);
-                        ctx.fillStyle = "rgba(244, 67, 54, .8)";
                         var w = 3,
                             h = 3;
+                        ctx.moveTo(pos.long, pos.lat);
+                        pts.push(new Landing(pos.long, pos.lat, w, h, data[i].recclass, data[i].mass, data[i].name, data[i].year, data[i].reclat, data[i].reclong))
+                            /*for (var j = 300; j < 2400; j += 300) {
+                                var year = data[i].year
+                                if (year == undefined | year == "" | year == " ") {
+                                    year = 0;
+                                } else {
+                                    year = year.substring(0, 4);
+                                }
+                                if (year > j - 300 && year < j) {
+                                    console.log("[" + (j - 300) + ", " + j + "]")
+                                }
+                            }*/
+                        var ranges = [];
+                        for (var j = 300; j < 2400; j += 300) {
+                            ranges.push({
+                                "min": j - 300,
+                                "max": j
+                            });
+                        }
+                        var year = data[i].year
+                        if (year == undefined | year == "" | year == " ") {
+                            year = 0;
+                        } else {
+                            year = year.substring(0, 4);
+                        }
+
+                        if (year > 0 && year < 1000) {
+                            ctx.fillStyle = "rgba(121, 85, 72, .95)";
+                        }
+                        if (year > 1000 && year < 1100) {
+                            ctx.fillStyle = "rgba(96, 125, 139, 0.7)";
+                        }
+                        if (year > 1100 && year < 1200) {
+                            ctx.fillStyle = "rgba(156, 39, 176, .7)";
+                        }
+                        if (year > 1200 && year < 1300) {
+                            ctx.fillStyle = "rgba(33, 150, 243, .7)";
+                        }
+                        if (year > 1400 && year < 1500) {
+                            ctx.fillStyle = "rgba(26, 35, 126, .7)";
+                        }
+                        if (year > 1500 && year < 1600) {
+                            ctx.fillStyle = "rgba(76, 175, 80, 0.7)";
+                        }
+                        if (year > 1600 && year < 1700) {
+                            ctx.fillStyle = "rgba(255, 235, 59, 0.7)";
+                        }
+                        if (year > 1700 && year < 1800) {
+                            ctx.fillStyle = "rgba(255, 87, 34, 0.7)";
+                        }
+                        if (year > 1800 && year < 1900) {
+                            ctx.fillStyle = "rgba(118, 255, 3, 0.7)";
+                        }
+                        if (year > 1900 && year < 2000) {
+                            ctx.fillStyle = "rgba(0, 150, 136, 0.7)";
+                        }
+                        if (year > 2000 && year < 2100) {
+                            ctx.fillStyle = "rgba(244, 67, 54, .6)";
+                        }
+
                         ctx.fillRect(pos.long, pos.lat, w, h);
-                        pts.push(new Landing(pos.long, pos.lat, w, h, data[i].mass, data[i].name, data[i].year, data[i].reclat, data[i].reclong))
                         ctx.fill();
                     }
                     offset += limit;
-                    if (offset <= 50000) {
+                    if (offset <= 46000) {
                         get(offset);
                     }
                 });
@@ -50,6 +109,7 @@ window.onload = function () {
             })
         })(0);
     }
+    img.style.opacity = .5;
     img.src = "map.svg";
     canvas.addEventListener('mousemove', mousemoved, false);
 }
@@ -92,7 +152,7 @@ function clicked(i) {
     info.appendChild(heading);
     var content = document.createElement('div');
     content.className = "info-content";
-    content.innerHTML = "Name: " + pts[i].name + "<br>Mass: " + pts[i].mass + "g<br>Year Fallen: " + pts[i].year.substring(0, 4) + "<br>Latitude: " + pts[i].lat + "<br>Longitude: " + pts[i].long;
+    content.innerHTML = "Name: " + pts[i].name + "<br>Recorded Class: " + pts[i].recclass + "<br>Mass: " + pts[i].mass + "g<br>Year Fallen: " + pts[i].year.substring(0, 4) + "<br>Latitude: " + pts[i].lat + "<br>Longitude: " + pts[i].long;
     info.appendChild(content);
     info.style.right = 0;
 }
